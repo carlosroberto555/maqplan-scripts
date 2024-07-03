@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "maqplan-scripts": "./cli.js"
+    "maqplan-scripts": "./cli.js",
+    "maqplan": "./cli.js",
+    "maq": "./cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
