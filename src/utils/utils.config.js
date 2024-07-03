@@ -1,10 +1,9 @@
-import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import fs from 'node:fs/promises';
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const CONFIG_PATH = `${process.env.HOME}/.maqplan`;
-const CONFIG_FILE = `${CONFIG_PATH}/config.json`;
-const AWS_CREDENTIALS_PATH = `${process.env.HOME}/.aws/credentials`;
+const CONFIG_PATH = path.resolve(process.env.HOME, '.maqplan');
+const CONFIG_FILE = path.resolve(CONFIG_PATH, 'config.json');
+const AWS_CREDENTIALS_PATH = path.resolve(process.env.HOME, '.aws/credentials');
 
 /**
  * @typedef {{ host: string, localPort: number, remotePort: number }} DatabaseConfig
@@ -15,7 +14,7 @@ export class Utils {
   /**
    * @returns {Promise<Config[]>}
    */
-  static async getAllConfigs() {
+  static async getAllConfigs(throwError = true) {
     try {
       await fs.mkdir(CONFIG_PATH, { recursive: true });
     } catch (error) {
@@ -26,9 +25,13 @@ export class Utils {
       const config = await fs.readFile(CONFIG_FILE, 'utf-8');
       return JSON.parse(config) || {};
     } catch (error) {
-      console.error('There is no config file.\nPlease run `maqplan configure` to create one.');
-      process.exit(1);
+      if (throwError) {
+        console.error('There is no config file.\nPlease run `maqplan configure` to create one.');
+        process.exit(1);
+      }
     }
+
+    return {};
   }
 
   /**
@@ -50,7 +53,7 @@ export class Utils {
       config.name = 'default';
     }
 
-    const configs = await Utils.getAllConfigs();
+    const configs = await Utils.getAllConfigs(false);
     configs[config.name] = config;
     
     await fs.writeFile(CONFIG_FILE, JSON.stringify(configs, null, 2));
