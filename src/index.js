@@ -6,6 +6,7 @@ import { sshAction } from "./actions/ssh.action.js";
 import { configureAction } from "./actions/configure.action.js";
 import { listInstancesAction } from "./actions/list-instances.action.js";
 import { proxyDatabaseAction } from "./actions/proxy-database.action.js";
+import { listConfigsAction } from "./actions/list-configs.action.js";
 
 const require = createRequire(import.meta.url);
 const program = new Command();
@@ -26,6 +27,11 @@ program
   .description("Configure an env to use with the other commands")
   .action(configureAction)
 	.passThroughOptions(true);
+
+program
+  .command("list-configs")
+  .description("List all the configured envs")
+  .action(listConfigsAction);
 
 program
 	.command("list-instances")
