@@ -3,12 +3,25 @@ import fs from 'node:fs/promises';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
+/**
+ * @typedef {{ host: string, localPort: number, remotePort: number }} DatabaseConfig
+ * @typedef {{ profile: string, region: string, name: string, instanceName: string, instance: string, database?: DatabaseConfig }} Config
+ */
+
 export class Utils {
+  /**
+   * @returns {Promise<Config[]>}
+   */
   static async getAllConfigs() {
     const config = await fs.readFile(`${__dirname}../../.config.json`, 'utf-8');
     return JSON.parse(config) || {};
   }
 
+  /**
+   * @param {Config['name']} env 
+   * @param {Config} defaults 
+   * @returns {Promise<Config>}
+   */
   static async getConfig(env, defaults = {}) {
     const configs = await Utils.getAllConfigs();
 

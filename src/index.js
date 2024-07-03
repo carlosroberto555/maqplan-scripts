@@ -2,8 +2,9 @@
 import { Command } from "commander";
 import pkg from "../package.json" assert { type: "json" };
 
-import { configureAction } from "./actions/configure.action.js";
 import { sshAction } from "./actions/ssh.action.js";
+import { configureAction } from "./actions/configure.action.js";
+import { listInstancesAction } from "./actions/list-instances.action.js";
 
 const program = new Command();
 
@@ -24,9 +25,18 @@ program
 	.passThroughOptions(true);
 
 program
+	.command("list-instances")
+	.description("List EC2 instances in the AWS account")
+	.option("--name <string>", "The tag Name of the instance")
+	.option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "qas")
+	.option("--profile <string>", "The name of AWS Profile")
+	.option("--region <string>", "The region on AWS")
+  .action(listInstancesAction)
+
+program
 	.command("ssh")
 	.description("Connect to a EC2 instance via SSH")
-	.option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all options", "qas")
+	.option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "qas")
 	.option("--instance <string>", "Instance ID to connect. If not provided, will find the instance by the tag Name")
 	.option("--profile <string>", "The name of AWS Profile")
 	.option("--region <string>", "The region on AWS")
