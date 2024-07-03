@@ -7,7 +7,7 @@ export const configureAsks = async (options) => {
 
   config.name = await input({
     message: "Name of configuration (without spaces or special chars):",
-    default: config.profile,
+    default: awsProfile.profile,
   });
 
   const configureDatabaseProxy = await confirm({

@@ -8,6 +8,7 @@ export const awsProfileAsks = async () => {
   config.profile = await select({
     message: "What the AWS profile?",
     choices: profiles.map(profile => ({ name: profile, value: profile })),
+    default: "default",
   });
 
   config.region = await input({

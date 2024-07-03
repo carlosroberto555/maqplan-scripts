@@ -1,11 +1,12 @@
 {
   "name": "maqplan-scripts",
-  "description": "Scripts for Maqplan",
+  "description": "Scripts to manage Maqplan AWS resources",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --no-warnings src/index.js"
   },
   "keywords": [],
   "author": "",
