@@ -1,13 +1,15 @@
-#!/usr/bin/env node
 import { Command } from "commander";
-import pkg from "../package.json" assert { type: "json" };
+import { createRequire } from "node:module";
+// import pkg from "../package.json" with { type: "json" };
 
 import { sshAction } from "./actions/ssh.action.js";
 import { configureAction } from "./actions/configure.action.js";
 import { listInstancesAction } from "./actions/list-instances.action.js";
 import { proxyDatabaseAction } from "./actions/proxy-database.action.js";
 
+const require = createRequire(import.meta.url);
 const program = new Command();
+const pkg = require("../package.json");
 
 program
 	.option("--profile <string>", "The name of AWS Profile")
