@@ -11,9 +11,15 @@ importers:
       '@inquirer/prompts':
         specifier: ^5.1.0
         version: 5.1.0
+      cli-spinners:
+        specifier: ^3.1.0
+        version: 3.1.0
       commander:
         specifier: ^12.1.0
         version: 12.1.0
+      yoctocolors:
+        specifier: ^2.1.0
+        version: 2.1.0
 
 packages:
 
@@ -97,6 +103,10 @@ packages:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
 
+  cli-spinners@3.1.0:
+    resolution: {integrity: sha512-2MH0N34TpDAs9ROPVkZJfBWFoYfv4zfkJF14PBHY4v/qRY75SLcm4WaEKNCLScsXieosa/tY/+slJ+BDswJxHQ==}
+    engines: {node: '>=18.20'}
+
   cli-width@4.1.0:
     resolution: {integrity: sha512-ouuZd4/dm2Sw5Gmqy6bGyNNNe1qt9RpmxveLSO7KcgsTnU7RXfsw+/bukWGo1abgBiMAic068rclZsO4IWmmxQ==}
     engines: {node: '>= 12'}
@@ -167,6 +177,10 @@ packages:
 
   yoctocolors-cjs@2.1.1:
     resolution: {integrity: sha512-c6T13b6qYcJZvck7QbEFXrFX/Mu2KOjvAGiKHmYMUg96jxNpfP6i+psGW72BOPxOIDUJrORG+Kyu7quMX9CQBQ==}
+    engines: {node: '>=18'}
+
+  yoctocolors@2.1.0:
+    resolution: {integrity: sha512-FsQpXXeOEe05tcJN4Z2eicuC6+6KiJdBbPOAChanSkwwjZ277XGsh8wh/HaPuGeifTiw/7dgAzabitu2bnDvRg==}
     engines: {node: '>=18'}
 
 snapshots:
@@ -284,6 +298,8 @@ snapshots:
 
   cli-spinners@2.9.2: {}
 
+  cli-spinners@3.1.0: {}
+
   cli-width@4.1.0: {}
 
   color-convert@2.0.1:
@@ -341,3 +357,5 @@ snapshots:
       strip-ansi: 6.0.1
 
   yoctocolors-cjs@2.1.1: {}
+
+  yoctocolors@2.1.0: {}

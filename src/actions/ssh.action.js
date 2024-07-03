@@ -1,11 +1,11 @@
 import { spawn } from 'node:child_process';
 
-import { Utils } from '../utils/utils.config.js';
+import { ConfigUtil } from '../utils/config.util.js';
 import { ec2InstanceAsks } from '../asks/ec2-instance.asks.js';
 
 export const sshAction = async (options) => {
     const { env, ...defaults } = options;
-    const config = await Utils.getConfig(env, defaults);
+    const config = await ConfigUtil.getConfig(env, defaults);
 
     if (!options.instance) {
         const result = await ec2InstanceAsks(config);

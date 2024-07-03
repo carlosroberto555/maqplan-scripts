@@ -10,7 +10,7 @@ const AWS_CREDENTIALS_PATH = path.resolve(process.env.HOME, '.aws/credentials');
  * @typedef {{ profile: string, region: string, name: string, instanceName: string, instance: string, database?: DatabaseConfig }} Config
  */
 
-export class Utils {
+export class ConfigUtil {
   /**
    * @returns {Promise<Config[]>}
    */
@@ -40,7 +40,7 @@ export class Utils {
    * @returns {Promise<Config>}
    */
   static async getConfig(env, defaults = {}) {
-    const configs = await Utils.getAllConfigs();
+    const configs = await ConfigUtil.getAllConfigs();
 
     return {
       ...configs[env],
@@ -53,7 +53,7 @@ export class Utils {
       config.name = 'default';
     }
 
-    const configs = await Utils.getAllConfigs(false);
+    const configs = await ConfigUtil.getAllConfigs(false);
     configs[config.name] = config;
     
     await fs.writeFile(CONFIG_FILE, JSON.stringify(configs, null, 2));

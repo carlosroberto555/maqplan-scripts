@@ -1,9 +1,9 @@
 import { input, select } from "@inquirer/prompts";
-import { Utils } from "../utils/utils.config.js";
+import { ConfigUtil } from "../utils/config.util.js";
 
 export const awsProfileAsks = async () => {
   const config = {};
-  const profiles = await Utils.getAwsProfiles();
+  const profiles = await ConfigUtil.getAwsProfiles();
 
   config.profile = await select({
     message: "What the AWS profile?",
