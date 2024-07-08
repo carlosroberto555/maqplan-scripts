@@ -12,6 +12,8 @@ const AWS_CREDENTIALS_PATH = path.resolve(process.env.HOME, '.aws/credentials');
 
 export class ConfigUtil {
   /**
+   * Get the list of all configurations
+   * @param {boolean} throwError Throw an error if the config file does not exist, or return an empty object
    * @returns {Promise<Config[]>}
    */
   static async getAllConfigs(throwError = true) {
@@ -35,6 +37,7 @@ export class ConfigUtil {
   }
 
   /**
+   * Get the configuration for the given environment
    * @param {Config['name']} env 
    * @param {Config} defaults 
    * @returns {Promise<Config>}
@@ -48,6 +51,10 @@ export class ConfigUtil {
     };
   }
 
+  /**
+   * Write the configuration to the config file
+   * @param {Config} config 
+   */
   static async writeConfig(config) {
     if (!config.name) {
       config.name = 'default';
@@ -59,6 +66,10 @@ export class ConfigUtil {
     await fs.writeFile(CONFIG_FILE, JSON.stringify(configs, null, 2));
   }
 
+  /**
+   * Get the list of AWS profiles names
+   * @returns {Promise<string[]>}
+   */
   static async getAwsProfiles() {
     const awsProfiles = await fs.readFile(AWS_CREDENTIALS_PATH, "utf8");
     const profiles = awsProfiles.match(/\[(.*?)\]/g);
