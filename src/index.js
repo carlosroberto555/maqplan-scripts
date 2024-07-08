@@ -13,20 +13,20 @@ const program = new Command();
 const pkg = require("../package.json");
 
 program
-	.option("--profile <string>", "The name of AWS Profile")
-	.option("--region <string>", "The region on AWS")
-	.enablePositionalOptions(true);
+  .option("--profile <string>", "The name of AWS Profile")
+  .option("--region <string>", "The region on AWS")
+  .enablePositionalOptions(true);
 
 program
-	.name("maqplan-scripts")
-	.description(pkg.description)
-	.version(pkg.version, "-v, --version");
+  .name("maqplan-scripts")
+  .description(pkg.description)
+  .version(pkg.version, "-v, --version");
 
 program
   .command("configure")
   .description("Configure an env to use with the other commands")
   .action(configureAction)
-	.passThroughOptions(true);
+  .passThroughOptions(true);
 
 program
   .command("list-configs")
@@ -34,31 +34,31 @@ program
   .action(listConfigsAction);
 
 program
-	.command("list-instances")
-	.description("List EC2 instances in the AWS account")
-	.option("--name <string>", "Filter by tag Name of the instance")
-	.option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "default")
-	.option("--profile <string>", "The name of AWS Profile")
-	.option("--region <string>", "The region on AWS")
+  .command("list-instances")
+  .description("List EC2 instances in the AWS account")
+  .option("--name <string>", "Filter by tag Name of the instance")
+  .option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "default")
+  .option("--profile <string>", "The name of AWS Profile")
+  .option("--region <string>", "The region on AWS")
   .action(listInstancesAction)
 
 program
-	.command("ssh")
-	.description("Connect to a EC2 instance via SSH")
-	.option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "default")
-	.option("--instance <string>", "Instance ID to connect. If not provided, will find the instance by the tag Name")
-	.option("--profile <string>", "The name of AWS Profile")
-	.option("--region <string>", "The region on AWS")
+  .command("ssh")
+  .description("Connect to a EC2 instance via SSH")
+  .option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "default")
+  .option("--instance <string>", "Instance ID to connect. If not provided, will find the instance by the tag Name")
+  .option("--profile <string>", "The name of AWS Profile")
+  .option("--region <string>", "The region on AWS")
   .action(sshAction)
 
 program
-	.command("proxy-database")
-	.description("Create a proxy to connect to a database")
-	.option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "default")
-	.option("--instance <string>", "Instance ID to connect. If not provided, will find the instance by the tag Name")
-	.option("--local-port <number>", "Local port to connect to the database")
-	.option("--remote-port <number>", "Remote port to connect to the database")
-	.option("--host <string>", "Host of the database")
-	.action(proxyDatabaseAction)
+  .command("proxy-database")
+  .description("Create a proxy to connect to a database")
+  .option("--env <string>", "Env with configurations (default instance, profile, region). If not provided, will need to provide all next options", "default")
+  .option("--instance <string>", "Instance ID to connect. If not provided, will find the instance by the tag Name")
+  .option("--local-port <number>", "Local port to connect to the database")
+  .option("--remote-port <number>", "Remote port to connect to the database")
+  .option("--host <string>", "Host of the database")
+  .action(proxyDatabaseAction)
 
 program.parse();
