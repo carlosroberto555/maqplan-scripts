@@ -21,6 +21,7 @@ export const sshAction = async (options) => {
       '--target', config.instance,
     ];
   
+    process.stdin.setRawMode(true);
     spawn("aws", params, { stdio: "inherit" });
   } catch (error) {
     console.error(error.message);
