@@ -11,11 +11,18 @@ export const listInstancesService = async (config, name = '') => {
     "--query", "'Reservations[].Instances[].{Name:[Tags[?Key==`Name`].Value][0][0], InstanceID:InstanceId, LaunchTime:LaunchTime, State:State.Name, Type:InstanceType}'",
   ];
 
+  const filters = [
+    "'Name=instance-state-name,Values=running'"
+  ];
+
   if (name) {
-    command.push("--filters", `Name=tag:Name,Values=*${name}*`);
+    filters.push(`'Name=tag:Name,Values=*${name}*'`);
   }
 
-  const result = await exec(command.join(" "));
+  command.push("--filters", filters.join(" "));
+
+  const commandStr = command.join(" ");
+  const result = await exec(commandStr);
 
   return JSON.parse(result.stdout);
 }
