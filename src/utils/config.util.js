@@ -1,9 +1,13 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 
-const CONFIG_PATH = path.resolve(process.env.HOME, '.maqplan');
+function getUserHome() {
+  return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
+const CONFIG_PATH = path.resolve(getUserHome(), '.maqplan');
 const CONFIG_FILE = path.resolve(CONFIG_PATH, 'config.json');
-const AWS_CREDENTIALS_PATH = path.resolve(process.env.HOME, '.aws/credentials');
+const AWS_CREDENTIALS_PATH = path.resolve(getUserHome(), '.aws', 'credentials');
 
 /**
  * @typedef {{ host: string, localPort: number, remotePort: number }} DatabaseConfig
