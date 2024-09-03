@@ -1,13 +1,14 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 
+import { listAwsProfilesService } from '../services/list-aws-profiles.service.js';
+
 function getUserHome() {
   return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 }
 
 const CONFIG_PATH = path.resolve(getUserHome(), '.maqplan');
 const CONFIG_FILE = path.resolve(CONFIG_PATH, 'config.json');
-const AWS_CREDENTIALS_PATH = path.resolve(getUserHome(), '.aws', 'credentials');
 
 /**
  * @typedef {{ host: string, localPort: number, remotePort: number }} DatabaseConfig
@@ -74,9 +75,7 @@ export class ConfigUtil {
    * Get the list of AWS profiles names
    * @returns {Promise<string[]>}
    */
-  static async getAwsProfiles() {
-    const awsProfiles = await fs.readFile(AWS_CREDENTIALS_PATH, "utf8");
-    const profiles = awsProfiles.match(/\[(.*?)\]/g);
-    return profiles.map(profile => profile.replace("[", "").replace("]", ""));
+  static getAwsProfiles() {
+    return listAwsProfilesService();
   }
 }
