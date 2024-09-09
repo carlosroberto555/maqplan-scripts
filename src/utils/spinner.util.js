@@ -6,7 +6,7 @@ import colors from 'yoctocolors';
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const require = createRequire(import.meta.url);
-const spinners = require(path.resolve(__dirname, '../../node_modules/cli-spinners/spinners.json'));
+const spinners = require(path.normalize(path.join(__dirname, '../../node_modules/cli-spinners/spinners.json')));
 
 export class Spinner {
   #spinner;
