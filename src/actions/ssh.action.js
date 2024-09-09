@@ -19,6 +19,8 @@ export const sshAction = async (options) => {
       '--region', config.region,
       '--profile', config.profile,
       '--target', config.instance,
+      '--document-name', 'AWS-StartInteractiveCommand',
+      '--parameters', '{"command": ["cd $HOME && bash -l"]}'
     ];
   
     process.stdin.setRawMode(true);
